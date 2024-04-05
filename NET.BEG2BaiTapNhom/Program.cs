@@ -13,8 +13,6 @@ namespace NET.BEG2BaiTapNhom
             Console.OutputEncoding = Encoding.UTF8;
             Buoi4Bai3Nhom kqB4BaiNhom = new Buoi4Bai3Nhom();
             kqB4BaiNhom.B4Bai3();
-
-
             Console.ReadKey();
         }
     }
