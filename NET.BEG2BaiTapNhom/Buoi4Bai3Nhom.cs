@@ -162,6 +162,7 @@ namespace NET.BEG2BaiTapNhom
                             break;
                         case 0:
                             Console.WriteLine("Thoát chương trình!");
+                            Environment.Exit(0);
                             flag = true;
                             break;
                         default:
