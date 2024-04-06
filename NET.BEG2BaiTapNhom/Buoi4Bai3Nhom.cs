@@ -114,7 +114,8 @@ namespace NET.BEG2BaiTapNhom
         public void B4Bai3()
         {
             // Viết menu chương trình 
-            while (true)
+            bool flag = false;
+            do
             {
                 Console.WriteLine("\nMENU");
                 Console.WriteLine("1. Nhập danh sách hóa đơn");
@@ -127,46 +128,48 @@ namespace NET.BEG2BaiTapNhom
 
                 string nhap = Console.ReadLine();
                 int chon;
-                if(Convert.ToInt32(nhap) == 0)
+                if (!Int32.TryParse(nhap, out chon))
                 {
                     Console.WriteLine("Lựa chọn không hợp lệ, mời nhập lại!");
-                    return;
-                }   
-                else
-                   chon = Convert.ToInt32(nhap);               
-                switch (chon)
-                {
-                    case 1:
-                        Console.Write("Nhập số lượng hóa đơn: ");
-                        int n = Convert.ToInt32(Console.ReadLine());
-                        NhapDanhSachHoaDon(n);
-                        break;
-                    case 2:
-                        XoaNoHoaDon();
-                        break;
-                    case 3:
-                        Console.Write("Nhập mã hóa đơn (để trống nếu muốn xuất tất cả): ");
-                        string maHD = Console.ReadLine();
-                        Console.Write("Trạng thái nợ (1: Còn nợ, 0: Không nợ, Khác: Tất cả): ");
-                        string trangThai = Console.ReadLine();
-                        bool? ttNo = trangThai == "1" ? true : trangThai == "0" ? false : (bool?)null;
-                        XuatDanhSachHoaDon(maHD, ttNo);
-                        break;
-                    case 4:
-                        Console.Write("Nhập số ngày (30, 60, 90): ");
-                        int ngay = Convert.ToInt32(Console.ReadLine());
-                        HoaDonConNoTheoMoc(ngay);
-                        break;
-                    case 5:
-                        XuatHoaDonRaText();
-                        break;
-                    case 0:
-                        return;
-                    default:
-                        Console.WriteLine("Lựa chọn không hợp lệ.");
-                        break;
                 }
-            }
+                else
+                {
+                    switch (chon)
+                    {
+                        case 1:
+                            Console.Write("Nhập số lượng hóa đơn: ");
+                            int n = Convert.ToInt32(Console.ReadLine());
+                            NhapDanhSachHoaDon(n);
+                            break;
+                        case 2:
+                            XoaNoHoaDon();
+                            break;
+                        case 3:
+                            Console.Write("Nhập mã hóa đơn (để trống nếu muốn xuất tất cả): ");
+                            string maHD = Console.ReadLine();
+                            Console.Write("Trạng thái nợ (1: Còn nợ, 0: Không nợ, Khác: Tất cả): ");
+                            string trangThai = Console.ReadLine();
+                            bool? ttNo = trangThai == "1" ? true : trangThai == "0" ? false : (bool?)null;
+                            XuatDanhSachHoaDon(maHD, ttNo);
+                            break;
+                        case 4:
+                            Console.Write("Nhập số ngày (30, 60, 90): ");
+                            int ngay = Convert.ToInt32(Console.ReadLine());
+                            HoaDonConNoTheoMoc(ngay);
+                            break;
+                        case 5:
+                            XuatHoaDonRaText();
+                            break;
+                        case 0:
+                            Console.WriteLine("Thoát chương trình!");
+                            flag = true;
+                            break;
+                        default:
+                            Console.WriteLine("Lựa chọn không hợp lệ.");
+                            break;
+                    }
+                }              
+            } while (!flag);
         }
         
         public void NhapDanhSachHoaDon(int n) // Tham số n. Số lượng hóa đơn cần nhập n
